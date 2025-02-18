@@ -1,0 +1,2 @@
+# Netflix-DNS-Splitter
+一个用于在VPS上配置特定DNS服务器以访问Netflix的脚本。它允许用户为Netflix指定一个特定的DNS服务器，而其他DNS查询则使用预设的公共DNS服务器，包括IPv4和IPv6选项。
