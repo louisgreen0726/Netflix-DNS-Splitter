@@ -18,7 +18,7 @@ mv /etc/dnsmasq.conf /etc/dnsmasq.conf.backup
 echo "创建新的dnsmasq配置文件..."
 
 # 获取用户输入的Netflix DNS
-read -p "请输入用于netflix.com的DNS服务器地址（例如43.252.21.254）: " NETFLIX_DNS
+read -p "请输入用于netflix.com的DNS服务器地址（例如1.1.1.1）: " NETFLIX_DNS
 
 # 配置文件内容
 cat << EOF > /etc/dnsmasq.conf
