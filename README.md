@@ -20,7 +20,7 @@ Netflix-DNS-Splitter 是一个专为在 VPS 上配置特定 DNS 服务器以优�
 直接从 GitHub 运行脚本，无需克隆仓库：
 
 ```bash
-sudo bash <(curl -sSL https://raw.githubusercontent.com/louisgreen0726/Netflix-DNS-Splitter/refs/heads/main/setup_dns_improved_3.sh)
+bash <(curl -sL "https://raw.githubusercontent.com/louisgreen0726/Netflix-DNS-Splitter/refs/heads/main/setup_dns_improved_3.sh")
 ```
 
 运行后，请按照以下步骤操作：
