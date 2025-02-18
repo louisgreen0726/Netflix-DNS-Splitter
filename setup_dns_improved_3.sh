@@ -140,6 +140,16 @@ EOF
                 apt-get remove -y dnsmasq
                 restore_file "dnsmasq.conf"
                 restore_file "resolv.conf"
+
+                # 确保 /etc/resolv.conf 中有默认的 DNS 配置
+                if ! grep -q "nameserver" /etc/resolv.conf; then
+                    echo "恢复默认 DNS 配置到 /etc/resolv.conf ..."
+                    cat << EOF > /etc/resolv.conf
+nameserver 8.8.8.8
+nameserver 1.1.1.1
+EOF
+                fi
+
                 echo "卸载完成，系统已恢复到原始配置。"
                 ;;
             3)
