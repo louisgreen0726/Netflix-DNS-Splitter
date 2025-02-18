@@ -16,15 +16,8 @@
 
 ## 使用方法
 
-1. 克隆仓库：
+
    ```bash
-   git clone https://github.com/louisgreen0726/Netflix-DNS-Splitter.git
-   cd Netflix-DNS-Splitter
-   
-2.给脚本执行权限：
-   chmod +x setup_dns_improved.sh
-
-3.运行脚本：
-   sudo ./setup_dns_improved.sh
-
+   bash <(curl -sL "https://raw.githubusercontent.com/louisgreen0726/Netflix-DNS-Splitter/refs/heads/main/setup_dns_improved.sh")
+```
 运行脚本时，你将被提示输入用于Netflix的DNS服务器地址。
