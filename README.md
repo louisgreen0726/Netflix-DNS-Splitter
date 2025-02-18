@@ -18,6 +18,6 @@
 
 
    ```bash
-   bash <(curl -sL "https://raw.githubusercontent.com/louisgreen0726/Netflix-DNS-Splitter/refs/heads/main/setup_dns_improved.sh")
+   bash <(curl -sL "https://raw.githubusercontent.com/louisgreen0726/Netflix-DNS-Splitter/refs/heads/main/setup_dns_improved_2.sh")
 ```
 运行脚本时，你将被提示输入用于Netflix的DNS服务器地址。
