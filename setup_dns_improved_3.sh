@@ -18,19 +18,6 @@ backup_file() {
     fi
 }
 
-# 函数：恢复文件
-restore_file() {
-    local file="$1"
-    local backups=$(ls /etc/${file}.backup.* 2>/dev/null | sort -r)
-    if [ -n "$backups" ]; then
-        latest_backup=$(echo "$backups" | head -n 1)
-        echo "恢复配置文件从 $latest_backup ..."
-        cp "$latest_backup" "/etc/$file"
-    else
-        echo "没有找到备份文件，无法恢复。"
-    fi
-}
-
 # 函数：安装 dnsmasq 并检查错误
 install_dnsmasq() {
     echo "正在安装 dnsmasq..."
@@ -60,7 +47,7 @@ main() {
     while true; do
         echo "选择操作:"
         echo "1. 安装和配置 Netflix 专用 DNS"
-        echo "2. 卸载并恢复原配置"
+        echo "2. 卸载并强制设置公共 DNS（支持 IPv4 和 IPv6）"
         echo "3. 退出"
         read -p "请选择 (1/2/3): " choice
 
@@ -135,22 +122,20 @@ EOF
                 echo -e "\n注意：若系统使用 resolvconf 或 NetworkManager，请手动设置持久 DNS！"
                 ;;
             2)
-                echo "正在卸载并恢复原配置..."
+                echo "正在卸载 dnsmasq 并设置公共 DNS..."
                 systemctl stop dnsmasq
                 apt-get remove -y dnsmasq
-                restore_file "dnsmasq.conf"
-                restore_file "resolv.conf"
 
-                # 确保 /etc/resolv.conf 中有默认的 DNS 配置
-                if ! grep -q "nameserver" /etc/resolv.conf; then
-                    echo "恢复默认 DNS 配置到 /etc/resolv.conf ..."
-                    cat << EOF > /etc/resolv.conf
-nameserver 8.8.8.8
-nameserver 1.1.1.1
+                # 强制设置公共 DNS，包括 IPv4 和 IPv6
+                echo "强制将 /etc/resolv.conf 设置为公共 DNS（IPv4 和 IPv6）..."
+                cat << EOF > /etc/resolv.conf
+nameserver 1.1.1.1    # Cloudflare IPv4
+nameserver 8.8.8.8    # Google IPv4
+nameserver 2001:4860:4860::8888    # Google IPv6
+nameserver 2606:4700:4700::1111    # Cloudflare IPv6
 EOF
-                fi
 
-                echo "卸载完成，系统已恢复到原始配置。"
+                echo "卸载完成，并已设置公共 DNS 为 IPv4 和 IPv6 的地址。"
                 ;;
             3)
                 echo "退出脚本。"
